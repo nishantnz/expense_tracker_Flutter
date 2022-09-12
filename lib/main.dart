@@ -1,14 +1,49 @@
+import 'package:expense_tracker/transaction.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+  final List<Transactions> transaction = [
+    Transactions(
+      id: 't1',
+      title: "new Shoes",
+      amount: 12,
+      date: DateTime.now(),
+    ),
+    Transactions(
+      id: 't2',
+      title: "new car",
+      amount: 1200,
+      date: DateTime.now(),
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return MaterialApp(
+        home: Scaffold(
+      appBar: AppBar(
+        title: Text("Expense Tracker"),
+      ),
+      body: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+        Container(
+          width: double.infinity,
+          child: Card(
+            child: Text("chart"),
+            elevation: 10.76,
+            color: Colors.blue,
+          ),
+        ),
+        Column(
+          children: transaction.map((tx) {
+            return Card(child: Text(tx.title.toString()));
+          }).toList(),
+        ),
+      ]),
+    ));
   }
 }
