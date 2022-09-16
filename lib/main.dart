@@ -2,6 +2,7 @@ import 'package:expense_tracker/models/transaction.dart';
 import 'package:expense_tracker/widgets/new_transaction.dart';
 import 'package:expense_tracker/widgets/transactions_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 void main() {
@@ -76,7 +77,10 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           IconButton(
             icon: Icon(Icons.add),
-            onPressed: () => _startAddNewTransactionModel(context),
+            onPressed: () {
+              _startAddNewTransactionModel(context);
+              HapticFeedback.heavyImpact();
+            },
           ),
         ],
       ),
@@ -99,7 +103,10 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () => _startAddNewTransactionModel(context),
+        onPressed: () {
+          _startAddNewTransactionModel(context);
+          HapticFeedback.heavyImpact();
+        },
       ),
     );
   }

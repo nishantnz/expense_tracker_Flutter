@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
@@ -45,7 +46,12 @@ class _NewTransactionState extends State<NewTransaction> {
             keyboardType: TextInputType.number,
             onSubmitted: (_) => submitData(),
           ),
-          TextButton(onPressed: submitData, child: Text("Add Transaction"))
+          TextButton(
+              onPressed: () {
+                submitData();
+                HapticFeedback.heavyImpact();
+              },
+              child: Text("Add Transaction"))
         ]),
       ),
     );
