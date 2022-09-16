@@ -13,51 +13,71 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 450,
-      child: ListView.builder(
-        itemBuilder: ((context, index) {
-          return Card(
-            child: Row(
+      child: transaction.isEmpty
+          ? Column(
               children: [
-                Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    border: Border.all(color: Colors.black, width: 2),
-                  ),
-                  child: Text(
-                    "₹${transaction[index].amount.toStringAsFixed(2)}",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
+                const Text(
+                  "No transactions Added yet!",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 Container(
-                  width: 200, //added fix width to prevent overflowing of pixels
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    height: 300,
+                    child: Image.asset(
+                      'assets/image/waiting.png',
+                      fit: BoxFit.cover,
+                    ))
+              ],
+            )
+          : ListView.builder(
+              itemBuilder: ((context, index) {
+                return Card(
+                  child: Row(
                     children: [
-                      Text(
-                        transaction[index].title,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        margin:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColorLight,
+                          border: Border.all(color: Colors.black, width: 2),
+                        ),
+                        child: Text(
+                          "₹${transaction[index].amount.toStringAsFixed(2)}",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
+                        ),
                       ),
-                      Text(
-                        DateFormat.yMMMMEEEEd()
-                            .add_Hm()
-                            .format(transaction[index].date),
-                        style: TextStyle(color: Colors.grey),
-                      ),
+                      Container(
+                        width:
+                            200, //added fix width to prevent overflowing of pixels
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              transaction[index].title,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 15),
+                            ),
+                            Text(
+                              DateFormat.yMMMMEEEEd()
+                                  .add_Hm()
+                                  .format(transaction[index].date),
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          ],
+                        ),
+                      )
                     ],
                   ),
-                )
-              ],
+                );
+              }),
+              itemCount: transaction.length,
             ),
-          );
-        }),
-        itemCount: transaction.length,
-      ),
     );
   }
 }
