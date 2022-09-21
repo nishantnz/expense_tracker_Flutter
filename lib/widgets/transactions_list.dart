@@ -33,31 +33,36 @@ class TransactionList extends StatelessWidget {
             )
           : ListView.builder(
               itemBuilder: ((context, index) {
-                return ListTile(
-                  leading: CircleAvatar(
-                    radius: 30,
-                    child: Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: FittedBox(
-                        child: Text(
-                          "₹${transaction[index].amount.toStringAsFixed(2)}",
-                          // style: TextStyle(
-                          //   //   fontWeight: FontWeight.bold,
-                          //   fontSize: 500,
-                          // ),
+                return Card(
+                  elevation: 10,
+                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: FittedBox(
+                          child: Text(
+                            "₹${transaction[index].amount.toStringAsFixed(2)}",
+                            // style: TextStyle(
+                            //   //   fontWeight: FontWeight.bold,
+                            //   fontSize: 500,
+                            // ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  title: Text(
-                    transaction[index].title,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                  ),
-                  subtitle: Text(
-                    DateFormat.yMMMMEEEEd()
-                        .add_Hm()
-                        .format(transaction[index].date),
-                    style: TextStyle(color: Colors.grey),
+                    title: Text(
+                      transaction[index].title,
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+                    subtitle: Text(
+                      DateFormat.yMMMMEEEEd()
+                          .add_Hm()
+                          .format(transaction[index].date),
+                      style: TextStyle(color: Colors.grey),
+                    ),
                   ),
                 );
                 /* you can use your custom widget but alternative(Listtile) also can be used
