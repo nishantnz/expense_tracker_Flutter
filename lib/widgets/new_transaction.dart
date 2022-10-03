@@ -14,18 +14,23 @@ class NewTransaction extends StatefulWidget {
 
 class _NewTransactionState extends State<NewTransaction> {
   final titleController = TextEditingController();
-
   final amountController = TextEditingController();
   DateTime? selectedDate;
 
   void submitData() {
+    if (amountController.text.isEmpty) {
+      return;
+    }
     final enteredTitle = titleController.text;
     final enteredAmount = double.parse(amountController.text);
-    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+    if (enteredTitle.isEmpty || enteredAmount <= 0 || selectedDate == null) {
       return;
     }
     widget.newTransactionHandler(
-        titleController.text, double.parse(amountController.text));
+      enteredTitle,
+      enteredAmount,
+      selectedDate,
+    );
 //pops out the topmost screen/page that is displayed ...obviously when you submit the data
     Navigator.of(context).pop();
   }
@@ -39,11 +44,10 @@ class _NewTransactionState extends State<NewTransaction> {
     ).then((pickedDate) {
       if (pickedDate == null) {
         return;
-      } else {
-        setState(() {
-          selectedDate = pickedDate;
-        });
       }
+      setState(() {
+        selectedDate = pickedDate;
+      });
     });
   }
 
@@ -76,9 +80,7 @@ class _NewTransactionState extends State<NewTransaction> {
                         : "Picked Date: ${DateFormat.yMEd().format(selectedDate!)}",
                   ),
                   TextButton(
-                    onPressed: () {
-                      presentDatePicker();
-                    },
+                    onPressed: presentDatePicker,
                     child: const Text(
                       "Choose date!",
                       style: TextStyle(fontWeight: FontWeight.bold),
