@@ -71,23 +71,24 @@ class _NewTransactionState extends State<NewTransaction> {
           ),
           Container(
             height: 70,
-            child: Expanded(
-              child: Row(
-                children: [
-                  Text(
-                    selectedDate == null
-                        ? "No Date Chosen!"
-                        : "Picked Date: ${DateFormat.yMEd().format(selectedDate!)}",
+            child: Row(
+              children: [
+                Text(
+                  selectedDate == null
+                      ? "No Date Chosen!"
+                      : "Date: ${DateFormat.yMEd().format(selectedDate!)}",
+                ),
+                TextButton(
+                  onPressed: () {
+                    presentDatePicker();
+                    HapticFeedback.heavyImpact();
+                  },
+                  child: const Text(
+                    "Choose date!",
+                    style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  TextButton(
-                    onPressed: presentDatePicker,
-                    child: const Text(
-                      "Choose date!",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           ElevatedButton(
